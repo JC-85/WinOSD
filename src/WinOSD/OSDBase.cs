@@ -9,26 +9,27 @@ using System.Runtime.InteropServices;
 
 namespace WinOSD
 {
-	/// <summary>
-    /// Base class which represents a floating native window with transparency and custom painting
-	/// </summary>
-	public class FloatingWindow : NativeWindow, IDisposable
+    public enum AnimateMode
     {
-        #region #  Enums  #
-        public enum AnimateMode
-        {
-            Blend,
-            SlideRightToLeft,
-            SlideLeftToRight,
-            SlideTopToBottom,
-            SlideBottmToTop,
-            RollRightToLeft,
-            RollLeftToRight,
-            RollTopToBottom,
-            RollBottmToTop,
-            ExpandCollapse
-        }
-        #endregion
+        Blend,
+        SlideRightToLeft,
+        SlideLeftToRight,
+        SlideTopToBottom,
+        SlideBottmToTop,
+        RollRightToLeft,
+        RollLeftToRight,
+        RollTopToBottom,
+        RollBottmToTop,
+        ExpandCollapse
+    }
+
+
+    /// <summary>
+    /// Base class which represents a floating native window with transparency and custom painting
+    /// </summary>
+    internal class OSDNativeForm : NativeWindow, IDisposable
+    {
+
 
         #region #  Fields  #
         private bool _disposed = false;

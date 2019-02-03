@@ -1,4 +1,4 @@
-namespace OSD.Demo
+namespace WinOSD.Demo
 {
     partial class Demo
     {

@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{77B99531-579D-4C48-BBAA-41789BA75F13}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsDemo", "Demo\WinFormsDemo.csproj", "{77B99531-579D-4C48-BBAA-41789BA75F13}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinOSD", "WinOSD\WinOSD.csproj", "{0C544869-F9FA-4372-88A1-E5E86C53F0A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{8D32A011-C0EA-4502-9D1B-A8551C44E5C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFDemo", "WPFDemo\WPFDemo.csproj", "{DD6E2614-8172-45F8-B8C6-9ACAF87E43C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,17 @@ Global
 		{0C544869-F9FA-4372-88A1-E5E86C53F0A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C544869-F9FA-4372-88A1-E5E86C53F0A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C544869-F9FA-4372-88A1-E5E86C53F0A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD6E2614-8172-45F8-B8C6-9ACAF87E43C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD6E2614-8172-45F8-B8C6-9ACAF87E43C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD6E2614-8172-45F8-B8C6-9ACAF87E43C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD6E2614-8172-45F8-B8C6-9ACAF87E43C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{77B99531-579D-4C48-BBAA-41789BA75F13} = {8D32A011-C0EA-4502-9D1B-A8551C44E5C8}
+		{DD6E2614-8172-45F8-B8C6-9ACAF87E43C5} = {8D32A011-C0EA-4502-9D1B-A8551C44E5C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6ADDBB45-3A45-4F90-8D7D-5E967D6B3C6C}

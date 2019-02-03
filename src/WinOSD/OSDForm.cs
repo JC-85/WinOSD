@@ -6,12 +6,15 @@ using System.Windows.Forms;
 
 namespace WinOSD
 {
-    public class FloatingOSDWindow : FloatingWindow
+    internal class OSDForm : OSDNativeForm
     {
+        public static Rectangle ScreenRect => Screen.PrimaryScreen.Bounds;
+        public static Font DefaultFont { get; set; } = new Font("Arial", 22f, FontStyle.Bold);
+
         #region Variables
         private SolidBrush _brush;
         private System.Drawing.StringFormat _stringFormat;
-        private Rectangle _rScreen;
+        
         private System.Windows.Forms.Timer _viewClock;
         private Font _textFont;
         private string _text;
@@ -32,9 +35,9 @@ namespace WinOSD
         /// <param name="mode">Effect to be applied. Work only if <c>time</c> greater than 0</param>
         /// <param name="time">Time, in milliseconds, for effect playing. If this equal to 0 <c>mode</c> ignored and text showed at once</param>
         /// <param name="text">Text to display</param>
-        public void Show(Point pt, byte alpha, Color textColor, Font textFont, int showTimeMSec,  AnimateMode mode, uint time, string text)
+        public void Show(string text, Point pt, byte alpha, Color textColor, Font textFont, int showTimeMSec,  AnimateMode mode, uint time)
         {
-            if(this._viewClock!=null)
+            if (this._viewClock != null)
             {
                 _viewClock.Stop();
                 _viewClock.Dispose();
@@ -45,28 +48,43 @@ namespace WinOSD
             this._mode = mode;
             this._time = time;
             SizeF textArea;
-            this._rScreen = Screen.PrimaryScreen.Bounds;
-            if(this._stringFormat == null)
-            {
-                this._stringFormat = new StringFormat();
-                this._stringFormat.Alignment = StringAlignment.Near;
-                this._stringFormat.LineAlignment = StringAlignment.Near;
-                this._stringFormat.Trimming = StringTrimming.EllipsisWord;
-            }
-            using(Bitmap bm = new Bitmap(base.Width, base.Height))
-                using(Graphics fx = Graphics.FromImage(bm))
-                    textArea = fx.MeasureString(text, textFont, this._rScreen.Width, this._stringFormat);
+
+            if (this._stringFormat == null)
+                _stringFormat = DefaultStringFormat;
+
+            textArea = MeasureString(text, textFont, _stringFormat);
+
             base.Location = pt;
             base.Alpha = alpha;
             base.Size = new Size((int)Math.Ceiling(textArea.Width), (int)Math.Ceiling(textArea.Height));
-            if(time > 0)
+            if (time > 0)
                 base.ShowAnimate(mode, time);
             else
                 base.Show();
-            _viewClock = new System.Windows.Forms.Timer();
-            _viewClock.Tick += new System.EventHandler(viewTimer);
+            _viewClock = new Timer();
+            _viewClock.Tick += viewTimer;
             _viewClock.Interval = showTimeMSec;
             _viewClock.Start();
+        }
+
+
+        private static StringFormat DefaultStringFormat => new StringFormat()
+        {
+            Alignment = StringAlignment.Near,
+            LineAlignment = StringAlignment.Near,
+            Trimming = StringTrimming.EllipsisWord
+        };
+
+        public static SizeF MeasureString(string text, Font textFont, StringFormat stringFormat)
+        {
+            if (stringFormat == null)
+                stringFormat = DefaultStringFormat;
+
+            SizeF textArea;
+            using (Bitmap bm = new Bitmap(250, 50))
+            using (Graphics fx = Graphics.FromImage(bm))
+                textArea = fx.MeasureString(text, textFont, ScreenRect.Width, stringFormat);
+            return textArea;
         }
         #endregion
 
